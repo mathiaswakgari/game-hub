@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import apiClinet from "../services/api-clinet";
-import { AxiosRequestConfig, CanceledError } from "axios";
-import GenreSkeleton from "../components/GenreSkeleton";
+import { CanceledError } from "axios";
 import { Genre } from "./useGenres";
 
 export interface Platform {
   id: number;
   name: string;
   slug: string;
+  platforms: {
+    id: number;
+  };
 }
 
 export interface Game {
@@ -23,7 +25,10 @@ interface FetchGames {
   results: Array<Game>;
 }
 
-const useGames = (selectedGenre: Genre) => {
+const useGames = (
+  selectedGenre?: Genre | null,
+  selectedPlatform?: Platform | null
+) => {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -38,9 +43,11 @@ const useGames = (selectedGenre: Genre) => {
         signal: controller.signal,
         params: {
           genres: selectedGenre?.id,
+          platforms: selectedPlatform?.id,
         },
       })
       .then((res) => {
+        // console.log(res.data.results);
         setGames(res.data.results);
         setIsLoading(false);
       })
@@ -51,7 +58,7 @@ const useGames = (selectedGenre: Genre) => {
       });
 
     return () => controller.abort();
-  }, [selectedGenre?.id]);
+  }, [selectedGenre?.id, selectedPlatform?.id]);
 
   return {
     games,

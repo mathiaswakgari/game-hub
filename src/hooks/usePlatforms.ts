@@ -5,6 +5,9 @@ export interface Platform {
   id: number;
   name: string;
   slug: string;
+  platforms: {
+    id: number;
+  };
 }
 interface FetchPlatforms {
   results: Array<Platform>;
