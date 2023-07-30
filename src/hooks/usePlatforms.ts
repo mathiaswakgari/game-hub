@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import apiClinet from "../services/api-clinet";
 
-interface Platform {
+export interface Platform {
   id: number;
   name: string;
   slug: string;
@@ -21,10 +21,12 @@ const usePlatforms = () => {
       .get<FetchPlatforms>("/platforms/lists/parents", {
         signal: controller.signal,
       })
-      .then((res) => setPlatforms(res.data.results))
+      .then((res) => {
+        setPlatforms(res.data.results);
+      })
       .catch((error) => setError(error.message));
 
-    controller.abort();
+    return () => controller.abort();
   }, []);
 
   return {
