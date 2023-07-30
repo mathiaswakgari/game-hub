@@ -1,5 +1,6 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import usePlatforms, { Platform } from "../hooks/usePlatforms";
+import { AiFillCaretDown } from "react-icons/ai";
 
 interface Props {
   onSelectedPlatform: (platfrom: Platform) => void;
@@ -11,7 +12,7 @@ const PlatformSelector = ({ onSelectedPlatform, selectedPlatform }: Props) => {
 
   return (
     <Menu>
-      <MenuButton as={Button}>
+      <MenuButton as={Button} rightIcon={<AiFillCaretDown />}>
         {selectedPlatform?.name || "Platforms"}
       </MenuButton>
       <MenuList>

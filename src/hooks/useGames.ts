@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import apiClinet from "../services/api-clinet";
 import { CanceledError } from "axios";
-import { Genre } from "./useGenres";
+import { GameQuery } from "../App";
 
 export interface Platform {
   id: number;
@@ -25,10 +25,7 @@ interface FetchGames {
   results: Array<Game>;
 }
 
-const useGames = (
-  selectedGenre?: Genre | null,
-  selectedPlatform?: Platform | null
-) => {
+const useGames = (gameQuery: GameQuery) => {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -42,8 +39,8 @@ const useGames = (
       .get<FetchGames>("/games", {
         signal: controller.signal,
         params: {
-          genres: selectedGenre?.id,
-          platforms: selectedPlatform?.id,
+          genres: gameQuery.genre?.id,
+          platforms: gameQuery.platform?.id,
         },
       })
       .then((res) => {
@@ -58,7 +55,7 @@ const useGames = (
       });
 
     return () => controller.abort();
-  }, [selectedGenre?.id, selectedPlatform?.id]);
+  }, [gameQuery]);
 
   return {
     games,
