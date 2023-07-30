@@ -15,6 +15,10 @@ function App() {
                 "navbar navbar" 
                 "aside  main"`,
       }}
+      templateColumns={{
+        base: "1fr",
+        lg: "300px 1fr",
+      }}
     >
       <GridItem area={"navbar"}>
         <NavBar />
@@ -23,7 +27,7 @@ function App() {
         <GameGrid />
       </GridItem>
       <Show above="lg">
-        <GridItem area={"aside"}>
+        <GridItem area={"aside"} paddingX={"20px"}>
           <GenresList />
         </GridItem>
       </Show>
