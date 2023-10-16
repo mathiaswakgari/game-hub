@@ -24,9 +24,8 @@ interface FetchGames {
   results: Array<Game>;
 }
 
-const apiClient = new ApiClient<FetchGames>("/games");
-
 const useGames = (gameQuery: GameQuery) => {
+  const apiClient = new ApiClient<FetchGames>("/games");
   // params: {
   //   genres: gameQuery.genre?.id,
   //   platforms: gameQuery.platform?.id,
@@ -34,8 +33,8 @@ const useGames = (gameQuery: GameQuery) => {
   //   search: gameQuery.searchText,
   // },
 
-  return useQuery<FetchGames, Error, FetchGames, string[]>({
-    queryKey: ["games"],
+  return useQuery<FetchGames, Error, FetchGames, (string | GameQuery)[]>({
+    queryKey: ["games", gameQuery],
     queryFn: apiClient.getAll,
   });
 };
