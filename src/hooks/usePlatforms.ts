@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import apiClinet from "../services/api-clinet";
+import { useQuery } from "@tanstack/react-query";
+import ApiClient from "../services/api-clinet";
 
 export interface Platform {
   id: number;
@@ -15,26 +17,12 @@ interface FetchPlatforms {
 }
 
 const usePlatforms = () => {
-  const [platforms, setPlatforms] = useState<Platform[]>([]);
-  const [error, setError] = useState("");
-  useEffect(() => {
-    const controller = new AbortController();
+  const apiClient = new ApiClient("/platforms/lists/parents");
 
-    apiClinet
-      .get<FetchPlatforms>("/platforms/lists/parents", {
-        signal: controller.signal,
-      })
-      .then((res) => {
-        setPlatforms(res.data.results);
-      })
-      .catch((error) => setError(error.message));
-
-    return () => controller.abort();
-  }, []);
-
-  return {
-    platforms,
-    error,
-  };
+  return useQuery({
+    queryKey: ["platforms"],
+    queryFn: apiClient.getAll,
+    staleTime: 10 * 1000,
+  });
 };
 export default usePlatforms;
