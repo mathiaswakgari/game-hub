@@ -1,6 +1,7 @@
 import { GameQuery } from "../App";
-import ApiClient from "../services/api-clinet";
+
 import { useQuery } from "@tanstack/react-query";
+import gamesService, { FetchGames } from "../services/gamesService";
 
 export interface Platform {
   id: number;
@@ -11,31 +12,19 @@ export interface Platform {
   };
 }
 
-export interface Game {
-  id: number;
-  name: string;
-  background_image: string;
-  metacritic: number;
-  parent_platforms: Array<{ platform: Platform }>;
-}
-
-interface FetchGames {
-  count: number;
-  results: Array<Game>;
-}
-
 const useGames = (gameQuery: GameQuery) => {
-  const apiClient = new ApiClient<FetchGames>("/games");
-  // params: {
-  //   genres: gameQuery.genre?.id,
-  //   platforms: gameQuery.platform?.id,
-  //   ordering: gameQuery.sortOrder,
-  //   search: gameQuery.searchText,
-  // },
-
   return useQuery<FetchGames, Error, FetchGames, (string | GameQuery)[]>({
     queryKey: ["games", gameQuery],
-    queryFn: apiClient.getAll,
+    queryFn: () => {
+      return gamesService.getAll({
+        params: {
+          genres: gameQuery.genre?.id,
+          parent_platform: gameQuery.platform?.id,
+          ordering: gameQuery.sortOrder,
+          search: gameQuery.searchText,
+        },
+      });
+    },
   });
 };
 

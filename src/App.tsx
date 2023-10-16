@@ -50,12 +50,12 @@ function App() {
                 setGameQuery({ ...gameQuery, platform });
               }}
             />
-            {/* <SortSelector
+            <SortSelector
               onSelectSort={(sortOrder) =>
                 setGameQuery({ ...gameQuery, sortOrder })
               }
               selectedSortOrder={gameQuery.sortOrder}
-            /> */}
+            />
           </HStack>
         </Box>
 
