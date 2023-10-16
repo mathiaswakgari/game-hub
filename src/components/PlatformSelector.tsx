@@ -1,6 +1,7 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import usePlatforms, { Platform } from "../hooks/usePlatforms";
+import usePlatforms from "../hooks/usePlatforms";
 import { AiFillCaretDown } from "react-icons/ai";
+import { Platform } from "../services/platformsService";
 
 interface Props {
   onSelectedPlatform: (platfrom: Platform) => void;
@@ -8,7 +9,7 @@ interface Props {
 }
 
 const PlatformSelector = ({ onSelectedPlatform, selectedPlatform }: Props) => {
-  const { platforms } = usePlatforms();
+  const { data: results } = usePlatforms();
 
   return (
     <Menu>
@@ -16,7 +17,7 @@ const PlatformSelector = ({ onSelectedPlatform, selectedPlatform }: Props) => {
         {selectedPlatform?.name || "Platforms"}
       </MenuButton>
       <MenuList>
-        {platforms.map((platform) => (
+        {results?.results.map((platform) => (
           <MenuItem
             key={platform.id}
             onClick={() => onSelectedPlatform(platform)}
