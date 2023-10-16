@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import apiClinet from "../services/api-clinet";
-import { CanceledError } from "axios";
 import { useQuery } from "@tanstack/react-query";
+import ApiClient from "../services/api-clinet";
 // import genres from "../data/Genres";
 
 export interface Genre {
@@ -15,13 +13,12 @@ interface FetchGenres {
   results: Array<Genre>;
 }
 
-const useGenres = () => {
-  const fetchGenres = () =>
-    apiClinet.get<FetchGenres>("/genres").then((res) => res.data);
+const apiClient = new ApiClient<FetchGenres>("/genres");
 
+const useGenres = () => {
   return useQuery<FetchGenres, Error, FetchGenres, string[]>({
     queryKey: ["genres"],
-    queryFn: fetchGenres,
+    queryFn: apiClient.getAll,
     staleTime: 10 * 1000,
   });
 };
