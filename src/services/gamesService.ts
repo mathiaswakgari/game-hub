@@ -12,6 +12,7 @@ export interface Game {
 export interface FetchGames {
   count: number;
   results: Array<Game>;
+  next: string | null;
 }
 
 export default new ApiClient<FetchGames>("/games");
