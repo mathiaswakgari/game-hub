@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import ms from "ms";
 import genresService, { FetchGenres } from "../services/genresService";
 import genres from "../data/Genres";
 
@@ -6,7 +7,7 @@ const useGenres = () => {
   return useQuery<FetchGenres, Error, FetchGenres, string[]>({
     queryKey: ["genres"],
     queryFn: genresService.getAll,
-    staleTime: 10 * 1000,
+    staleTime: ms("24h"),
     initialData: {
       count: genres.length,
       results: genres,
