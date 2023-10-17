@@ -7,13 +7,11 @@ import { useState } from "react";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
-import { Genre } from "./services/genresService";
 import { Platform } from "./services/platformsService";
 
 export interface GameQuery {
   genreId: number | null;
-  // genre: Genre | null;
-  platform: Platform | null;
+  platformId?: number;
   sortOrder: string;
   searchText: string;
 }
@@ -49,9 +47,9 @@ function App() {
           <GameHeading gameQuery={gameQuery} />
           <HStack>
             <PlatformSelector
-              selectedPlatform={gameQuery.platform}
-              onSelectedPlatform={(platform) => {
-                setGameQuery({ ...gameQuery, platform });
+              selectedPlatformId={gameQuery.platformId!}
+              onSelectedPlatform={(platformId) => {
+                setGameQuery({ ...gameQuery, platformId });
               }}
             />
             <SortSelector
