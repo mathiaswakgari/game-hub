@@ -11,11 +11,15 @@ import { Genre } from "./services/genresService";
 import { Platform } from "./services/platformsService";
 
 export interface GameQuery {
-  genre: Genre | null;
+  genreId: number | null;
+  // genre: Genre | null;
   platform: Platform | null;
   sortOrder: string;
   searchText: string;
 }
+
+// undefined : the absence of a value
+// null : the intentional absence of a value
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
@@ -64,9 +68,10 @@ function App() {
       <Show above="lg">
         <GridItem area={"aside"} paddingX={"20px"}>
           <GenresList
-            selectedGenre={gameQuery.genre}
-            onSelected={(genre) => {
-              setGameQuery({ ...gameQuery, genre });
+            selectedGenre={gameQuery.genreId}
+            onSelected={(genreId) => {
+              console.log(genreId);
+              setGameQuery({ ...gameQuery, genreId });
             }}
           />
         </GridItem>
