@@ -3,24 +3,13 @@ import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenresList from "./components/GenresList";
-import { useState } from "react";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
-
-export interface GameQuery {
-  genreId: number | null;
-  platformId?: number;
-  sortOrder: string;
-  searchText: string;
-}
-
 // undefined : the absence of a value
 // null : the intentional absence of a value
 
 function App() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-
   return (
     <Grid
       templateAreas={{
@@ -37,40 +26,21 @@ function App() {
       }}
     >
       <GridItem area={"navbar"}>
-        <NavBar
-          onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
-        />
+        <NavBar />
       </GridItem>
       <GridItem area={"main"}>
         <Box paddingLeft={"20px"} marginBottom={"20px"}>
-          <GameHeading gameQuery={gameQuery} />
+          <GameHeading />
           <HStack>
-            <PlatformSelector
-              selectedPlatformId={gameQuery.platformId!}
-              onSelectedPlatform={(platformId) => {
-                setGameQuery({ ...gameQuery, platformId });
-              }}
-            />
-            <SortSelector
-              onSelectSort={(sortOrder) =>
-                setGameQuery({ ...gameQuery, sortOrder })
-              }
-              selectedSortOrder={gameQuery.sortOrder}
-            />
+            <PlatformSelector />
+            <SortSelector />
           </HStack>
         </Box>
-
-        <GameGrid gameQuery={gameQuery} />
+        <GameGrid />
       </GridItem>
       <Show above="lg">
         <GridItem area={"aside"} paddingX={"20px"}>
-          <GenresList
-            selectedGenre={gameQuery.genreId}
-            onSelected={(genreId) => {
-              console.log(genreId);
-              setGameQuery({ ...gameQuery, genreId });
-            }}
-          />
+          <GenresList />
         </GridItem>
       </Show>
     </Grid>

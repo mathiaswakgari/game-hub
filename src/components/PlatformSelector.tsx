@@ -1,20 +1,13 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import usePlatforms from "../hooks/usePlatforms";
 import { AiFillCaretDown } from "react-icons/ai";
+import useGameQueryStoreStore from "../stores/gameQueryStore";
 
-interface Props {
-  onSelectedPlatform: (platfromId: number) => void;
-  selectedPlatformId: number | undefined;
-}
-
-const PlatformSelector = ({
-  onSelectedPlatform,
-  selectedPlatformId,
-}: Props) => {
+const PlatformSelector = () => {
+  const setPlatformId = useGameQueryStoreStore((s) => s.setPlatformId);
+  const platformId = useGameQueryStoreStore((s) => s.gameQuery.platformId);
   const { data: results } = usePlatforms();
-  const selectedPlatform = results?.results.find(
-    (p) => p.id === selectedPlatformId
-  );
+  const selectedPlatform = results?.results.find((p) => p.id === platformId);
 
   return (
     <Menu>
@@ -25,7 +18,7 @@ const PlatformSelector = ({
         {results?.results.map((platform) => (
           <MenuItem
             key={platform.id}
-            onClick={() => onSelectedPlatform(platform.id)}
+            onClick={() => setPlatformId(platform.id)}
           >
             {platform.name}
           </MenuItem>

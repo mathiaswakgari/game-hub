@@ -1,12 +1,8 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { AiFillCaretDown } from "react-icons/ai";
+import useGameQueryStoreStore from "../stores/gameQueryStore";
 
-interface Props {
-  onSelectSort: (order: string) => void;
-  selectedSortOrder: string;
-}
-
-const SortSelector = ({ onSelectSort, selectedSortOrder }: Props) => {
+const SortSelector = () => {
   const sortOrders = [
     { value: "", label: "Relevance" },
     { value: "added", label: "Date added" },
@@ -18,8 +14,12 @@ const SortSelector = ({ onSelectSort, selectedSortOrder }: Props) => {
     { value: "realsed", label: "Date released" },
   ];
 
+  const setSortOrder = useGameQueryStoreStore((s) => s.setSortOrder);
+
+  const sortOrder = useGameQueryStoreStore((s) => s.gameQuery.sortOrder);
+
   const currentSortOrder = sortOrders.find(
-    (order) => order.value === selectedSortOrder
+    (order) => order.value === sortOrder
   );
   return (
     <Menu>
@@ -28,7 +28,7 @@ const SortSelector = ({ onSelectSort, selectedSortOrder }: Props) => {
       </MenuButton>
       <MenuList>
         {sortOrders.map((order) => (
-          <MenuItem onClick={() => onSelectSort(order.value)} key={order.value}>
+          <MenuItem onClick={() => setSortOrder(order.value)} key={order.value}>
             {order.label}
           </MenuItem>
         ))}
