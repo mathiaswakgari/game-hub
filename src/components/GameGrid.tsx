@@ -3,6 +3,7 @@ import { SimpleGrid, Text, Button, Spinner } from "@chakra-ui/react";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const GameGrid = () => {
   const { data, error, isLoading, isFetchingNextPage, fetchNextPage } =
@@ -22,7 +23,9 @@ const GameGrid = () => {
         {data?.pages.map((page) => (
           <React.Fragment>
             {page?.results.map((game) => (
-              <GameCard key={game.id} game={game} />
+              <Link to={`games/${game.slug}`}>
+                <GameCard key={game.id} game={game} />
+              </Link>
             ))}
           </React.Fragment>
         ))}

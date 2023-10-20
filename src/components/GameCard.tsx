@@ -12,7 +12,12 @@ interface Props {
 const GameCard = ({ game }: Props) => {
   return (
     <GameCardContainer>
-      <Card>
+      <Card
+        _hover={{
+          transform: "scale(1.075)",
+          transitionDuration: "400ms",
+        }}
+      >
         <Image src={getCroppedImage(game.background_image)} />
         <CardBody>
           <HStack justifyContent={"space-between"}>

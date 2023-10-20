@@ -6,6 +6,7 @@ export interface Game {
   name: string;
   background_image: string;
   metacritic: number;
+  slug: string;
   parent_platforms: Array<{ platform: Platform }>;
 }
 
