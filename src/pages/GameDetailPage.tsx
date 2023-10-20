@@ -1,4 +1,4 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Grid, GridItem, Heading } from "@chakra-ui/react";
 
 import { useParams } from "react-router-dom";
 import useGame from "../hooks/useGame";
@@ -13,13 +13,22 @@ const GameDetailPage = () => {
   const { data } = useGame(slug!);
 
   return (
-    <Box>
-      <Heading>{data?.name}</Heading>
-      <ExpandableText text={data?.description_raw!} />
-      <GameAttributes game={data!} />
-      <GameTrailer slug={slug!} />
-      <GameScreenshots slug={slug!} />
-    </Box>
+    <Grid
+      templateColumns={{
+        base: `repeat(1, 1fr)`,
+        md: `repeat(2, 1fr)`,
+      }}
+    >
+      <GridItem>
+        <Heading>{data?.name}</Heading>
+        <ExpandableText text={data?.description_raw!} />
+        <GameAttributes game={data!} />
+      </GridItem>
+      <GridItem>
+        <GameTrailer slug={slug!} />
+        <GameScreenshots slug={slug!} />
+      </GridItem>
+    </Grid>
   );
 };
 

@@ -18,7 +18,7 @@ const GameScreenshots = ({ slug }: Props) => {
         columnGap={5}
         templateColumns={{
           base: "repeat(1, 1fr)",
-          lg: "repeat(2, 1fr)",
+          md: "repeat(2, 1fr)",
         }}
       >
         {screenshots?.results.map((screenshot) => (
