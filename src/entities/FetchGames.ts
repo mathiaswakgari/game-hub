@@ -1,7 +1,9 @@
-import { Game } from "./Game";
+import Game from "./Game";
 
-export interface FetchGames {
+interface FetchGames {
   count: number;
   results: Array<Game>;
   next: string | null;
 }
+
+export default FetchGames;

@@ -4,6 +4,7 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import React from "react";
 import { Link } from "react-router-dom";
+import Game from "../entities/Game";
 
 const GameGrid = () => {
   const { data, error, isLoading, isFetchingNextPage, fetchNextPage } =
@@ -22,7 +23,7 @@ const GameGrid = () => {
           skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
         {data?.pages.map((page) => (
           <React.Fragment>
-            {page?.results.map((game) => (
+            {page?.results.map((game: Game) => (
               <Link to={`games/${game.slug}`}>
                 <GameCard key={game.id} game={game} />
               </Link>

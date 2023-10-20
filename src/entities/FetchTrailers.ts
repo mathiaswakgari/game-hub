@@ -1,5 +1,5 @@
-import { Trailer } from "./Trailer";
+import Trailer from "./Trailer";
 
-export interface FetchTrailers {
+export default interface FetchTrailers {
   results: Trailer[];
 }

@@ -1,5 +1,6 @@
 import { Grid, Image } from "@chakra-ui/react";
 import useGameScreenshots from "../hooks/useGameScreenshots";
+import Screenshot from "../entities/Screenshot";
 
 interface Props {
   slug: string;
@@ -21,7 +22,7 @@ const GameScreenshots = ({ slug }: Props) => {
           md: "repeat(2, 1fr)",
         }}
       >
-        {screenshots?.results.map((screenshot) => (
+        {screenshots?.results.map((screenshot: Screenshot) => (
           <Image src={screenshot?.image} />
         ))}
       </Grid>

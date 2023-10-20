@@ -3,7 +3,7 @@ import PlatformIconList from "./PlatformIconList";
 import CriticScoreBadge from "./CriticScoreBadge";
 import getCroppedImage from "../services/image-url";
 import GameCardContainer from "./GameCardContainer";
-import { Game } from "../entities/Game";
+import Game from "../entities/Game";
 
 interface Props {
   game: Game;

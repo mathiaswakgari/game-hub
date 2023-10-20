@@ -10,6 +10,7 @@ import useGenres from "../hooks/useGenres";
 import getCroppedImage from "../services/image-url";
 import GenreSkeleton from "./GenreSkeleton";
 import useGameQueryStoreStore from "../stores/gameQueryStore";
+import Genre from "../entities/Genre";
 
 const GenresList = () => {
   const { data: results, error, isLoading } = useGenres();
@@ -30,7 +31,7 @@ const GenresList = () => {
               <GenreSkeleton />
             </ListItem>
           ))}
-        {results?.results.map((genre) => (
+        {results?.results.map((genre: Genre) => (
           <ListItem key={genre.id} paddingY={1.5}>
             <HStack>
               <Image

@@ -1,5 +1,5 @@
-import { Screenshot } from "./Screenshot";
+import Screenshot from "./Screenshot";
 
-export interface FetchScreenshots {
+export default interface FetchScreenshots {
   results: Screenshot[];
 }

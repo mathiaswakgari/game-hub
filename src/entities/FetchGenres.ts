@@ -1,6 +1,8 @@
-import { Genre } from "./Genre";
+import Genre from "./Genre";
 
-export interface FetchGenres {
+interface FetchGenres {
   count: number;
   results: Array<Genre>;
 }
+
+export default FetchGenres;

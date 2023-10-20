@@ -1,6 +1,6 @@
-import { Platform } from "./Platform";
+import Platform from "./Platform";
 
-export interface FetchPlatforms {
+export default interface FetchPlatforms {
   results: Array<Platform>;
   count: number;
 }
