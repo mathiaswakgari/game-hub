@@ -5,7 +5,7 @@ import { DiLinux } from "react-icons/di";
 import { MdPhoneIphone } from "react-icons/md";
 import { IconType } from "react-icons";
 import { HStack, Icon } from "@chakra-ui/react";
-import { Platform } from "../services/platformsService";
+import { Platform } from "../entities/Platform";
 
 interface Props {
   platforms: Platform[];
