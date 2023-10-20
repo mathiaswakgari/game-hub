@@ -1,23 +1,19 @@
-import "./App.css";
 import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
-import NavBar from "./components/NavBar";
-import GameGrid from "./components/GameGrid";
-import GenresList from "./components/GenresList";
-import PlatformSelector from "./components/PlatformSelector";
-import SortSelector from "./components/SortSelector";
-import GameHeading from "./components/GameHeading";
-// undefined : the absence of a value
-// null : the intentional absence of a value
+import GameGrid from "../components/GameGrid";
+import GenresList from "../components/GenresList";
+import PlatformSelector from "../components/PlatformSelector";
+import SortSelector from "../components/SortSelector";
+import GameHeading from "../components/GameHeading";
 
-function App() {
+const HomePage = () => {
   return (
     <Grid
       templateAreas={{
         base: `
-                "navbar" 
+                
                 "main"`,
         lg: `
-                "navbar navbar" 
+                
                 "aside  main"`,
       }}
       templateColumns={{
@@ -25,9 +21,6 @@ function App() {
         lg: "300px 1fr",
       }}
     >
-      <GridItem area={"navbar"}>
-        <NavBar />
-      </GridItem>
       <GridItem area={"main"}>
         <Box paddingLeft={"20px"} marginBottom={"20px"}>
           <GameHeading />
@@ -45,6 +38,6 @@ function App() {
       </Show>
     </Grid>
   );
-}
+};
 
-export default App;
+export default HomePage;
